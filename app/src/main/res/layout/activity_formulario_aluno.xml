@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/activity_formulario_telefone"
+        android:id="@+id/activity_formulario_aluno_telefone"
         android:layout_width="match_parent"
         android:layout_height="75dp"
         android:layout_marginTop="12dp"
@@ -34,7 +34,7 @@
         app:layout_constraintTop_toBottomOf="@+id/activity_formulario_aluno_nome" />
 
     <EditText
-        android:id="@+id/activity_formulario_email"
+        android:id="@+id/activity_formulario_aluno_email"
         android:layout_width="match_parent"
         android:layout_height="75dp"
         android:layout_marginTop="12dp"
@@ -44,10 +44,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_formulario_telefone" />
+        app:layout_constraintTop_toBottomOf="@+id/activity_formulario_aluno_telefone" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/activity_formulario_aluno_botao_salvar"
         android:layout_width="match_parent"
         android:layout_height="75dp"
         android:layout_marginTop="16dp"
@@ -55,6 +55,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_formulario_email" />
+        app:layout_constraintTop_toBottomOf="@+id/activity_formulario_aluno_email" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
