@@ -1,5 +1,6 @@
 package com.dgavieira.agenda.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.dgavieira.agenda.R;
 import com.dgavieira.agenda.dao.AlunoDAO;
 import com.dgavieira.agenda.model.Aluno;
+
+import java.io.Serializable;
 
 public class FormularioAlunoActivity extends AppCompatActivity {
 
@@ -27,6 +30,13 @@ public class FormularioAlunoActivity extends AppCompatActivity {
         setTitle(TITULO_APPBAR);
         inicializacaoDosCampos();
         configuraBotaoSalvar();
+
+        Intent dados = getIntent();
+        Aluno aluno = (Aluno) dados.getSerializableExtra("aluno");
+        campoNome.setText(aluno.getNome());
+        campoTelefone.setText(aluno.getTelefone());
+        campoEmail.setText(aluno.getEmail());
+
     }
 
     private void configuraBotaoSalvar() {
