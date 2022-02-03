@@ -1,15 +1,15 @@
 package com.dgavieira.agenda.ui.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import com.dgavieira.agenda.R;
-import com.dgavieira.agenda.dao.AlunoDAO;
-import com.dgavieira.agenda.model.Aluno;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.dgavieira.agenda.R;
+import com.dgavieira.agenda.dao.AlunoDAO;
+import com.dgavieira.agenda.model.Aluno;
 
 public class FormularioAlunoActivity extends AppCompatActivity {
 
@@ -35,8 +35,7 @@ public class FormularioAlunoActivity extends AppCompatActivity {
                 Aluno alunoCriado = new Aluno(nome, telefone, email);
                 dao.salva(alunoCriado);
 
-                startActivity(new Intent(FormularioAlunoActivity.this,
-                        ListaAlunosActivity.class));
+                finish();
 
             }
         });
