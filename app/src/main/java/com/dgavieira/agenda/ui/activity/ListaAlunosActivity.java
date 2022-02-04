@@ -5,6 +5,7 @@ import static com.dgavieira.agenda.ui.activity.ConstantesActivities.TITULO_APPBA
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -66,6 +67,14 @@ public class ListaAlunosActivity extends AppCompatActivity {
                 android.R.layout.simple_list_item_1,
                 alunos));
         configuraListenerDeCliquePorItem(listadeAlunos);
+        listadeAlunos.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int posicao, long id) {
+                Aluno alunoEscolhido = (Aluno) adapterView.getItemAtPosition(posicao);
+                dao.remove(alunoEscolhido);
+                return true;
+            }
+        });
     }
 
     private void configuraListenerDeCliquePorItem(ListView listadeAlunos) {
