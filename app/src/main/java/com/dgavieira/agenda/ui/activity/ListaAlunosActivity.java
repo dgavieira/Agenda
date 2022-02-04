@@ -5,9 +5,6 @@ import static com.dgavieira.agenda.ui.activity.ConstantesActivities.TITULO_APPBA
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -18,8 +15,6 @@ import com.dgavieira.agenda.R;
 import com.dgavieira.agenda.dao.AlunoDAO;
 import com.dgavieira.agenda.model.Aluno;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.util.List;
 
 public class ListaAlunosActivity extends AppCompatActivity {
 
@@ -33,7 +28,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
         setContentView(R.layout.activity_lista_alunos);
         setTitle(TITULO_APPBAR);
         configuraFabNovoAluno();
-
+        configuraLista();
         dao.salva(new Aluno("Alex", "1122223333", "alex@gmail.com"));
         dao.salva(new Aluno("Fran", "1122223333", "fran@gmail.com"));
 
@@ -42,12 +37,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
     private void configuraFabNovoAluno() {
         FloatingActionButton botaoNovoAluno = findViewById(R.id.
                 activity_lista_alunos_fab_novo_aluno);
-        botaoNovoAluno.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                abreFormularioAlunoModoInsereAluno();
-            }
-        });
+        botaoNovoAluno.setOnClickListener(view -> abreFormularioAlunoModoInsereAluno());
     }
 
     private void abreFormularioAlunoModoInsereAluno() {
@@ -57,40 +47,45 @@ public class ListaAlunosActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        configuraLista();
+        atualizaAlunos();
+    }
+
+    private void atualizaAlunos() {
+        adapter.clear();
+        adapter.addAll(dao.todos());
     }
 
     private void configuraLista() {
         ListView listaDeAlunos = findViewById(R.id.activity_lista_alunos_listview);
-        final List<Aluno> alunos = dao.todos();
-        configuraAdapter(listaDeAlunos, alunos);
+        configuraAdapter(listaDeAlunos);
         configuraListenerDeCliquePorItem(listaDeAlunos);
-        listaDeAlunos.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int posicao, long id) {
-                Aluno alunoEscolhido = (Aluno) adapterView.getItemAtPosition(posicao);
-                dao.remove(alunoEscolhido);
-                adapter.remove(alunoEscolhido);
-                return true;
-            }
+        configuraListenerDeCliqueLongoPorItem(listaDeAlunos);
+    }
+
+    private void configuraListenerDeCliqueLongoPorItem(ListView listaDeAlunos) {
+        listaDeAlunos.setOnItemLongClickListener((adapterView, view, posicao, id) -> {
+            Aluno alunoEscolhido = (Aluno) adapterView.getItemAtPosition(posicao);
+            removeAluno(alunoEscolhido);
+            return true;
         });
     }
 
-    private void configuraAdapter(ListView listadeAlunos, List<Aluno> alunos) {
+    private void removeAluno(Aluno aluno) {
+        dao.remove(aluno);
+        adapter.remove(aluno);
+    }
+
+    private void configuraAdapter(ListView listadeAlunos) {
         adapter = new ArrayAdapter<>(
                 this,
-                android.R.layout.simple_list_item_1,
-                alunos);
+                android.R.layout.simple_list_item_1);
         listadeAlunos.setAdapter(adapter);
     }
 
     private void configuraListenerDeCliquePorItem(ListView listadeAlunos) {
-        listadeAlunos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int posicao, long l) {
-                Aluno alunoEscolhido = (Aluno) adapterView.getItemAtPosition(posicao);
-                abreFormularioModoEditaAluno(alunoEscolhido);
-            }
+        listadeAlunos.setOnItemClickListener((adapterView, view, posicao, l) -> {
+            Aluno alunoEscolhido = (Aluno) adapterView.getItemAtPosition(posicao);
+            abreFormularioModoEditaAluno(alunoEscolhido);
         });
     }
 
