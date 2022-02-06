@@ -59,16 +59,6 @@
             tools:ignore="DuplicateSpeakableTextCheck"
             android:importantForAutofill="no" />
 
-        <Button
-            android:id="@+id/activity_formulario_aluno_botao_salvar"
-            android:layout_width="match_parent"
-            android:layout_height="75dp"
-            android:text="@string/salvar"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent" />
-
     </LinearLayout>
 
 
