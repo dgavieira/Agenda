@@ -93,7 +93,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
     private void configuraAdapter(ListView listadeAlunos) {
         adapter = new ArrayAdapter<>(
                 this,
-                android.R.layout.simple_list_item_1);
+                R.layout.item_aluno);
         listadeAlunos.setAdapter(adapter);
     }
 

@@ -22,7 +22,7 @@ public class Aluno implements Serializable {
     }
 
     public String getNome() {
-        return nome;
+        return nome ;
     }
 
     public String getTelefone() {
@@ -36,7 +36,7 @@ public class Aluno implements Serializable {
     @NonNull
     @Override
     public String toString() {
-        return nome;
+        return nome + " - " + telefone;
     }
 
     public void setId(int id) {
