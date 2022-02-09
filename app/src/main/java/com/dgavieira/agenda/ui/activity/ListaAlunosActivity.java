@@ -6,13 +6,9 @@ import static com.dgavieira.agenda.ui.activity.ConstantesActivities.TITULO_APPBA
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -22,15 +18,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.dgavieira.agenda.R;
 import com.dgavieira.agenda.dao.AlunoDAO;
 import com.dgavieira.agenda.model.Aluno;
+import com.dgavieira.agenda.ui.adapter.ListaAlunosAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ListaAlunosActivity extends AppCompatActivity {
 
     private final AlunoDAO dao = new AlunoDAO();
-    private ArrayAdapter<Aluno> adapter;
+    private ListaAlunosAdapter adapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -97,35 +91,9 @@ public class ListaAlunosActivity extends AppCompatActivity {
     }
 
     private void configuraAdapter(ListView listadeAlunos) {
-        adapter = new ArrayAdapter<>(
-                this,
-                R.layout.item_aluno);
-        listadeAlunos.setAdapter(new BaseAdapter() {
+        adapter = new ListaAlunosAdapter(this);
 
-            private final List<Aluno> alunos = new ArrayList<>();
-            @Override
-            public int getCount() {
-                return alunos.size();
-            }
-
-            @Override
-            public Aluno getItem(int posicao) {
-                return alunos.get(posicao);
-            }
-
-            @Override
-            public long getItemId(int posicao) {
-                return alunos.get(posicao).getId();
-            }
-
-            @Override
-            public View getView(int i, View view, ViewGroup viewGroup) {
-                View viewCriada = LayoutInflater
-                        .from(ListaAlunosActivity.this)
-                        .inflate(R.layout.item_aluno, viewGroup);
-                return viewCriada;
-            }
-        });
+        listadeAlunos.setAdapter(this.adapter);
     }
 
     private void configuraListenerDeCliquePorItem(ListView listadeAlunos) {
