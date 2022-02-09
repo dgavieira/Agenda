@@ -5,7 +5,4 @@
     <item
         android:id="@+id/activity_lista_alunos_menu_remover"
         android:title="@string/remover" />
-    <item
-        android:id="@+id/activity_lista_alunos_menu_teste"
-        android:title="@string/teste" />
 </menu>
