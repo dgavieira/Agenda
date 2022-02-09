@@ -3,6 +3,7 @@ package com.dgavieira.agenda.ui.activity;
 import static com.dgavieira.agenda.ui.activity.ConstantesActivities.CHAVE_ALUNO;
 import static com.dgavieira.agenda.ui.activity.ConstantesActivities.TITULO_APPBAR;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -33,7 +34,13 @@ public class ListaAlunosActivity extends AppCompatActivity {
         setTitle(TITULO_APPBAR);
         configuraFabNovoAluno();
         configuraLista();
-
+        new AlertDialog
+                .Builder(this)
+                .setTitle("Removendo aluno")
+                .setMessage("Tem certeza que quer remover o aluno?")
+                .setPositiveButton("Sim", null)
+                .setNegativeButton("Não", null)
+                .show();
     }
 
     @Override
