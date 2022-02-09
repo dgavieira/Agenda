@@ -51,7 +51,6 @@ public class ListaAlunosActivity extends AppCompatActivity {
                     item.getMenuInfo();
             Aluno alunoEscolhido = adapter.getItem(menuInfo.position);
             remove(alunoEscolhido);
-
         }
         return super.onContextItemSelected(item);
     }
@@ -92,7 +91,6 @@ public class ListaAlunosActivity extends AppCompatActivity {
 
     private void configuraAdapter(ListView listadeAlunos) {
         adapter = new ListaAlunosAdapter(this);
-
         listadeAlunos.setAdapter(this.adapter);
     }
 
