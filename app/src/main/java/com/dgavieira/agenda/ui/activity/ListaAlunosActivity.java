@@ -58,14 +58,11 @@ public class ListaAlunosActivity extends AppCompatActivity {
                 .Builder(this)
                 .setTitle("Removendo aluno")
                 .setMessage("Tem certeza que quer remover o aluno?")
-                .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo)
-                                item.getMenuInfo();
-                        Aluno alunoEscolhido = adapter.getItem(menuInfo.position);
-                        remove(alunoEscolhido);
-                    }
+                .setPositiveButton("Sim", (dialogInterface, i) -> {
+                    AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo)
+                            item.getMenuInfo();
+                    Aluno alunoEscolhido = adapter.getItem(menuInfo.position);
+                    remove(alunoEscolhido);
                 })
                 .setNegativeButton("Não", null)
                 .show();
